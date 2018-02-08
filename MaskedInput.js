@@ -23,6 +23,15 @@ $(function(){
         $(this).val(cVal.replace(/,/g, '.'));
         if(!(re.test(cVal.replace(",",".")))|| cVal.length > 6){
             $(this).val(cVal.substr(0,cVal.length-1));
+            $(this).notify("Максимальная длина комментария - 1000 символов.", "error");
+            $(this).addClass("errtextbox");
+        }
+    });
+
+    $('#message').on('input', function(){
+        cVal = $.trim($(this).val());
+        if(cVal.length > 1000){
+            $(this).val(cVal.substr(0,cVal.length-1));
         }
     });
 
@@ -43,13 +52,45 @@ $(function(){
         }
     });
 
-    $("#send").click(function(){
-        if (!(isError())) {
-            $("#regForm").submit();
-        } else {
-            $(this).notify("Не все обязательные поля верно заполнены.", "error");
+    /*
+    function validate(form) {
+        var elems = form.elements;
+        var error = false;
+
+        if (!elems.address.value) {
+            $('#address').notify("Поле должно быть заполнено.", "error");
+            $('#address').addClass("errtextbox");
+            error = true;
         }
-    });
+
+        if (!elems.phone.value) {
+            $('#phone').notify("Поле должно быть заполнено.", "error");
+            $('#phone').addClass("errtextbox");
+            error = true;
+        }
+
+        if (!elems.name.value) {
+            $('#name').notify("Поле должно быть заполнено.", "error");
+            $('#name').addClass("errtextbox");
+            error = true;
+        }
+
+        if (!elems.price.value) {
+            $('#price').notify("Поле должно быть заполнено.", "error");
+            $('#price').addClass("errtextbox");
+            error = true;
+        }
+
+            if (!elems.square.value) {
+            $('#square').notify("Поле должно быть заполнено.", "error");
+            $('#square').addClass("errtextbox");
+            error = true;
+        }
+        if(!error){
+            form.submit();
+        }
+    }
+    }*/
 
     function isEmail(email) {
         var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
