@@ -23,15 +23,6 @@ $(function(){
         $(this).val(cVal.replace(/,/g, '.'));
         if(!(re.test(cVal.replace(",",".")))|| cVal.length > 6){
             $(this).val(cVal.substr(0,cVal.length-1));
-            $(this).notify("Максимальная длина комментария - 1000 символов.", "error");
-            $(this).addClass("errtextbox");
-        }
-    });
-
-    $('#message').on('input', function(){
-        cVal = $.trim($(this).val());
-        if(cVal.length > 1000){
-            $(this).val(cVal.substr(0,cVal.length-1));
         }
     });
 
@@ -49,6 +40,15 @@ $(function(){
         $(this).val(cVal.replace(/,/g, '.'));
         if(!(re.test(cVal.replace(",",".")))|| cVal.length > 10){
             $(this).val(cVal.substr(0,cVal.length-1));
+        }
+    });
+
+    $('#message').on('input', function(){
+        cVal = $(this).val();
+        if(cVal.length > 1000){
+            $(this).val(cVal.substr(0, 1000));
+            $('#message').notify("Максимальная длина поля - 1000 символов.", "error");
+            $('#message').addClass("errtextbox");
         }
     });
 
